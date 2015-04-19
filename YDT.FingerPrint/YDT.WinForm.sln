@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YDT.WinForm", "YDT.WinForm\YDT.WinForm.csproj", "{D813B15D-6717-4695-AE1B-E6AF1A4C2536}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Dependency", "01.Dependency", "{F0BE26EB-CC5D-446A-B70B-BFE0B5346AEB}"
+	ProjectSection(SolutionItems) = preProject
+		01.Dependency\itextsharp.dll = 01.Dependency\itextsharp.dll
+		01.Dependency\log4net.dll = 01.Dependency\log4net.dll
+		01.Dependency\Newtonsoft.Json.dll = 01.Dependency\Newtonsoft.Json.dll
+		01.Dependency\WeifenLuo.WinFormsUI.Docking.dll = 01.Dependency\WeifenLuo.WinFormsUI.Docking.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Infrastructure", "02.Infrastructure", "{31F52D9A-EAF3-4604-8764-D23828EC63CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesoTellerIntDevice", "02.Infrastructure\TesoTellerIntDevice\TesoTellerIntDevice.csproj", "{733E4093-A38E-47B4-B4A1-06341E56BFA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D813B15D-6717-4695-AE1B-E6AF1A4C2536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D813B15D-6717-4695-AE1B-E6AF1A4C2536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D813B15D-6717-4695-AE1B-E6AF1A4C2536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D813B15D-6717-4695-AE1B-E6AF1A4C2536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{733E4093-A38E-47B4-B4A1-06341E56BFA1} = {31F52D9A-EAF3-4604-8764-D23828EC63CE}
+	EndGlobalSection
+EndGlobal

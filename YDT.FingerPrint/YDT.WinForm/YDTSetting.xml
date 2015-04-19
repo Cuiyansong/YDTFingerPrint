@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DocSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ReportTitle>指 纹 卡 片</ReportTitle>
+  <ReportHeader>[页眉]指纹模板 v1.0.1</ReportHeader>
+  <ReportFooter>[页脚]此文件仅供指纹授权使用</ReportFooter>
+  <ReportNamePrefix>YDT-</ReportNamePrefix>
+</DocSetting>

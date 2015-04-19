@@ -1,0 +1,1 @@
+﻿This is a temp folder for softwate. Do not delete this folder.

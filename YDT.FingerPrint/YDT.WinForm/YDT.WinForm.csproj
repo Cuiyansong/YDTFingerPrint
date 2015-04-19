@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D813B15D-6717-4695-AE1B-E6AF1A4C2536}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YDT.WinForm</RootNamespace>
+    <AssemblyName>YDT.WinForm</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\01.Dependency\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\01.Dependency\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\01.Dependency\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\01.Dependency\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\GlobalSetting.cs" />
+    <Compile Include="Common\IReportTemplate.cs" />
+    <Compile Include="Graphic\GraphicBase.cs" />
+    <Compile Include="Model\DocSetting.cs" />
+    <Compile Include="Model\DoubleHand.cs" />
+    <Compile Include="Model\FingerDescriptionAttribute.cs" />
+    <Compile Include="Common\StringConstant.cs" />
+    <Compile Include="Common\IDocument.cs" />
+    <Compile Include="Common\TesoDevMgmt.cs" />
+    <Compile Include="LogEntry.cs" />
+    <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\FingerPrint.cs" />
+    <Compile Include="Model\ReportDescriptionAttribute.cs" />
+    <Compile Include="Model\ReportTemplate.cs" />
+    <Compile Include="UCBase\DockChildEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCBase\DockChildEx.Designer.cs">
+      <DependentUpon>DockChildEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCBase\DockPanelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UCBase\DockPanelEx.Designer.cs">
+      <DependentUpon>DockPanelEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCControl\DocumentControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCControl\DocumentControl.Designer.cs">
+      <DependentUpon>DocumentControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCControl\FingerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCControl\FingerControl.Designer.cs">
+      <DependentUpon>FingerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCWindow\FrmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCWindow\FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCWindow\FrmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCWindow\FrmConfig.Designer.cs">
+      <DependentUpon>FrmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UCWindow\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCWindow\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCWindow\FrmNewTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCWindow\FrmNewTemplate.Designer.cs">
+      <DependentUpon>FrmNewTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utlity\PrintHelper.cs" />
+    <Compile Include="Utlity\TesoWin32Helper.cs" />
+    <Compile Include="Utlity\XMLHelper.cs" />
+    <EmbeddedResource Include="UCBase\DockChildEx.resx">
+      <DependentUpon>DockChildEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControl\DocumentControl.resx">
+      <DependentUpon>DocumentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCControl\FingerControl.resx">
+      <DependentUpon>FingerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCWindow\FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCWindow\FrmConfig.resx">
+      <DependentUpon>FrmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UCWindow\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCWindow\FrmNewTemplate.resx">
+      <DependentUpon>FrmNewTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Logo.ico" />
+    <Content Include="Templates\ReadMe.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Temp\ReadMe.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TesoLive.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="YDTSetting.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\02.Infrastructure\TesoTellerIntDevice\TesoTellerIntDevice.csproj">
+      <Project>{733e4093-a38e-47b4-b4a1-06341e56bfa1}</Project>
+      <Name>TesoTellerIntDevice</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
