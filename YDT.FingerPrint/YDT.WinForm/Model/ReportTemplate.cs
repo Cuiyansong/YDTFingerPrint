@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using YDT.WinForm.Common;
+using YDT.WinForm.Graphic;
 using YDT.WinForm.Utlity;
 
 namespace YDT.WinForm.Model
@@ -13,7 +14,7 @@ namespace YDT.WinForm.Model
     /// ReportTemplate
     /// </summary>
     [XmlRootAttribute("ReportTemplate", Namespace = "YDT.ReportTemplate", IsNullable = false)]
-    [ReportDescription(RangeAttachData.Text, "通用报告模板1")]
+    [ReportDescription(RangeAttachData.Text, "通用报告模板")]
     public class ReportTemplate : IReportTemplate, IDisposable
     {
         #region Graphic Resource
@@ -72,7 +73,7 @@ namespace YDT.WinForm.Model
             DrawPageHeader(g, doc);
             DrawTitle(g, doc);
             DrawGridInfo(g, doc);
-            DrawHandImages(g, doc);
+            DrawHands(g, doc);
             DrawPageFooter(g, doc);
         }
 
@@ -116,40 +117,12 @@ namespace YDT.WinForm.Model
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawHandImages(Graphics g, IDocument doc)
+        private void DrawHands(Graphics g, IDocument doc)
         {
-            if (doc != null && doc.Hands != null)
+            if(doc !=null && doc.Hands != null)
             {
-                var drawRect = fingerRect;
-                var fingerSize = new Size(36, 65);
-                var fingerXSpace = (int)(drawRect.Width - fingerSize.Width * 5) / 6;
-                var fingerYSpace = (int)(drawRect.Height - fingerSize.Height * 2) / 3;
-
-                for (int i = 0; i < 10; i++)
-                {
-                    g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(new Rectangle((int)drawRect.X + fingerXSpace + i % 5 * fingerXSpace + i % 5 * fingerSize.Width, (int)drawRect.Y + fingerYSpace + i / 5 * fingerYSpace + i / 5 * fingerSize.Height, fingerSize.Width, fingerSize.Height)));
-
-                    FingerPrint finger = doc.Hands.GetFinger(i);
-
-                    // draw image
-                    if (finger != null && finger.Image != null)
-                    {
-                        g.DrawImage(finger.Image, PrintHelper.MillimetreToPixel(new Rectangle((int)drawRect.X + fingerXSpace + i % 5 * fingerXSpace + i % 5 * fingerSize.Width, (int)drawRect.Y + fingerYSpace + i / 5 * fingerYSpace + i / 5 * fingerSize.Height, fingerSize.Width, fingerSize.Height - 10)));
-                    }
-
-                    // draw finger info
-                    if (finger != null)
-                    {
-                        var fingerStr = string.Format("{0}.{1}", i + 1, finger.Finger.GetText());
-                        StringFormat strFormat = new StringFormat()
-                        {
-                            Alignment = StringAlignment.Center,
-                            LineAlignment = StringAlignment.Center,
-                        };
-                        GenerateRectangleString(g, fingerStr, normalFont, normalBrush, strFormat, new Rectangle((int)drawRect.X + fingerXSpace + i % 5 * fingerXSpace + i % 5 * fingerSize.Width, (int)drawRect.Y + fingerYSpace + i / 5 * fingerYSpace + i / 5 * fingerSize.Height + fingerSize.Height - 10, fingerSize.Width, 10), false);
-                    }
-                }
-            }
+                doc.Hands.Draw(g, fingerRect);
+            } 
         }
         /// <summary>
         /// DrawGridInfo

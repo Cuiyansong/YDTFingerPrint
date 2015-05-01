@@ -1,19 +1,27 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using YDT.WinForm.Common;
+using YDT.WinForm.Graphic;
 
 namespace YDT.WinForm.Model
 {
     public class DoubleHand : IDisposable
     {
-        private Dictionary<Finger, FingerPrint> fingers;
+        /// <summary>
+        /// The fingers
+        /// </summary>
+        private SortedDictionary<Finger, GraphicFinger> fingers;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DoubleHand"/> class.
+        /// </summary>
         public DoubleHand()
         {
-            fingers = new Dictionary<Finger, FingerPrint>(10);
+            fingers = new SortedDictionary<Finger, GraphicFinger>();
             fingers.Add(Finger.LeftThumb, null);
             fingers.Add(Finger.LeftForeFinger, null);
             fingers.Add(Finger.LeftMiddleFinger, null);
@@ -26,7 +34,11 @@ namespace YDT.WinForm.Model
             fingers.Add(Finger.RightLittleFinger, null);
         }
 
-        public void AddFinger(FingerPrint fprint)
+        /// <summary>
+        /// Adds the finger.
+        /// </summary>
+        /// <param name="fprint">The fprint.</param>
+        public void AddFinger(GraphicFinger fprint)
         {
             //var fingerprint = fingers[fprint.Finger];
             //if (fingerprint != null)
@@ -34,16 +46,54 @@ namespace YDT.WinForm.Model
             fingers[fprint.Finger] = fprint;
         }
 
-        public FingerPrint GetFinger(Finger ftype)
+        /// <summary>
+        /// Gets the finger.
+        /// </summary>
+        /// <param name="ftype">The ftype.</param>
+        /// <returns></returns>
+        public GraphicFinger GetFinger(Finger ftype)
         {
             return fingers[ftype];
         }
 
-        public FingerPrint GetFinger(int index)
+        /// <summary>
+        /// Gets the finger.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
+        public GraphicFinger GetFinger(int index)
         {
             return fingers.First(x => x.Key.Equals((Finger)index)).Value;
         }
 
+        /// <summary>
+        /// Draws the specified g.
+        /// </summary>
+        /// <param name="g">The g.</param>
+        /// <param name="rectF">The rect f.</param>
+        public void Draw(Graphics g, RectangleF rectF)
+        {
+            if (fingers != null && fingers.Count > 0)
+            {
+                int index = 0;
+                foreach (KeyValuePair<Finger, GraphicFinger> item in fingers)
+                {
+                    if (item.Value != null)
+                    {
+                        float cellWidth = rectF.Width / 5;
+                        float cellHeight = rectF.Height / 2;
+                        item.Value.Draw(g, new RectangleF(rectF.X + index % 5 * cellWidth, rectF.Y + index / 5 * cellHeight, cellWidth, cellHeight));
+                        index++;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fingers the attribut value.
+        /// </summary>
+        /// <param name="ftype">The ftype.</param>
+        /// <returns></returns>
         [Obsolete("Replace with Finger.GetTest().")]
         public string FingerAttributValue(Finger ftype)
         {
@@ -113,7 +163,5 @@ namespace YDT.WinForm.Model
             disposed = true;
         }
         #endregion
-
-
     }
 }

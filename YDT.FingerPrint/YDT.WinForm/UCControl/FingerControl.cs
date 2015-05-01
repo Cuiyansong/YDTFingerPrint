@@ -8,17 +8,18 @@ using System.Text;
 using System.Windows.Forms;
 using YDT.WinForm.Model;
 using YDT.WinForm.Common;
+using YDT.WinForm.Graphic;
 
 namespace YDT.WinForm.UCControl
 {
     public partial class FingerControl : UserControl
     {
-        private FingerPrint fprint = new FingerPrint();
+        private GraphicFinger fprint = new GraphicFinger();
 
         /// <summary>
         /// Finger Print Class
         /// </summary>
-        public FingerPrint Fprint
+        public GraphicFinger Fprint
         {
             get { return fprint; }
             private set { fprint = value; }

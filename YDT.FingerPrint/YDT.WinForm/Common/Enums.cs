@@ -20,36 +20,39 @@ namespace YDT.WinForm.Common
     /// </summary>
     public enum Finger : int
     {
+        [FingerDescription(RangeAttachData.Text, "未知手指")]
+        UnknownThumb = 0,
+
         [FingerDescription(RangeAttachData.Text, "左手-拇指")]
-        LeftThumb = 0,
+        LeftThumb = 1,
 
         [FingerDescription(RangeAttachData.Text, "左手-食指")]
-        LeftForeFinger = 1,
+        LeftForeFinger = 2,
 
         [FingerDescription(RangeAttachData.Text, "左手-中指")]
-        LeftMiddleFinger = 2,
+        LeftMiddleFinger = 3,
 
         [FingerDescription(RangeAttachData.Text, "左手-无名指")]
-        LeftRingFinger = 3,
+        LeftRingFinger = 4,
 
         [FingerDescription(RangeAttachData.Text, "左手-小指")]
-        LeftLittleFinger = 4,
+        LeftLittleFinger = 5,
 
 
         [FingerDescription(RangeAttachData.Text, "右手-拇指")]
-        RightThumb = 5,
+        RightThumb =6,
 
         [FingerDescription(RangeAttachData.Text, "右手-食指")]
-        RightForeFinger = 6,
+        RightForeFinger = 7,
 
         [FingerDescription(RangeAttachData.Text, "右手-中指")]
-        RightMiddleFinger = 7,
+        RightMiddleFinger = 8,
 
         [FingerDescription(RangeAttachData.Text, "右手-无名指")]
-        RightRingFinger = 8,
+        RightRingFinger = 9,
 
         [FingerDescription(RangeAttachData.Text, "右手-小指")]
-        RightLittleFinger = 9,
+        RightLittleFinger = 10,
     }
 
 }

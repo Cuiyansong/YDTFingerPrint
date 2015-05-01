@@ -68,14 +68,14 @@
     <Compile Include="Graphic\GraphicBase.cs" />
     <Compile Include="Model\DocSetting.cs" />
     <Compile Include="Model\DoubleHand.cs" />
-    <Compile Include="Model\FingerDescriptionAttribute.cs" />
+    <Compile Include="Common\FingerDescriptionAttribute.cs" />
     <Compile Include="Common\StringConstant.cs" />
     <Compile Include="Common\IDocument.cs" />
     <Compile Include="Common\TesoDevMgmt.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Model\Document.cs" />
-    <Compile Include="Model\FingerPrint.cs" />
-    <Compile Include="Model\ReportDescriptionAttribute.cs" />
+    <Compile Include="Graphic\GraphicFinger.cs" />
+    <Compile Include="Common\ReportDescriptionAttribute.cs" />
     <Compile Include="Model\ReportTemplate.cs" />
     <Compile Include="UCBase\DockChildEx.cs">
       <SubType>Form</SubType>
