@@ -14,41 +14,108 @@ namespace YDT.WinForm.Model
     /// ReportTemplate
     /// </summary>
     [XmlRootAttribute("ReportTemplate", Namespace = "YDT.ReportTemplate", IsNullable = false)]
-    [ReportDescription(RangeAttachData.Text, "通用报告模板")]
+    [ReportDescription(RangeAttachData.Text, "通用报告模板1")]
     public class ReportTemplate : IReportTemplate, IDisposable
     {
         #region Graphic Resource
         private Pen LinePen = new Pen(Color.Gray, 2);
-
         private Font normalFont = new Font("宋体", 12, FontStyle.Regular);
-
-        private Font titleFont = new Font("黑体", 28, FontStyle.Bold);
-
+        private Font gutterFont = new Font("黑体", 8, FontStyle.Regular);
+        private Font titleFont = new Font("黑体", 25, FontStyle.Bold);
         private Font gridFont = new Font("宋体", 16, FontStyle.Regular);
-
         private Brush normalBrush = new SolidBrush(Color.Black);
+        private Brush gutterBrush = new SolidBrush(Color.Gray);
         #endregion
 
         #region Private Property
-
-        private static int paperWidth = GlobalSetting.DefaultPrintPageSizeMM.Width; 
-
-        private static int paperHeight = GlobalSetting.DefaultPrintPageSizeMM.Height; 
-
-        private RectangleF headerRect = new RectangleF(0, 0, paperWidth, 15);
-
-        private RectangleF titleRect = new RectangleF(0, 15, paperWidth, 47);
-
-        private RectangleF gridRect = new RectangleF(0, 62, paperWidth, 60);
-
-        private RectangleF fingerRect = new RectangleF(0, 122, paperWidth, 160);
-
-        private RectangleF footerRect = new RectangleF(0, 282, paperWidth, 15);
-
+        /// <summary>
+        /// The paper left margin
+        /// </summary>
+        private static int leftMargin = 32;
+        /// <summary>
+        /// The paper width
+        /// </summary>
+        private static int paperWidth = GlobalSetting.DefaultPrintPageSizeMM.Width;
+        /// <summary>
+        /// The paper height
+        /// </summary>
+        private static int paperHeight = GlobalSetting.DefaultPrintPageSizeMM.Height;
+        /// <summary>
+        /// The header rect
+        /// </summary>
+        private RectangleF gutterRect = new RectangleF(0, 0, leftMargin, paperHeight);
+        /// <summary>
+        /// The header rect
+        /// </summary>
+        private RectangleF headerRect = new RectangleF(leftMargin, 0, paperWidth - leftMargin, 15);
+        /// <summary>
+        /// The title rect
+        /// </summary>
+        private RectangleF titleRect = new RectangleF(leftMargin, 15, paperWidth - leftMargin, 30);
+        /// <summary>
+        /// The grid rect
+        /// </summary>
+        private RectangleF gridRect = new RectangleF(leftMargin, 45, paperWidth - leftMargin, 55);
+        /// <summary>
+        /// The finger rect
+        /// </summary>
+        private RectangleF fingerRect = new RectangleF(leftMargin, 100, paperWidth - leftMargin, 90);
+        /// <summary>
+        /// The finger rect
+        /// </summary>
+        private RectangleF locPicRect = new RectangleF(leftMargin, 190, paperWidth - leftMargin, 80);
+        /// <summary>
+        /// The footer rect
+        /// </summary>
+        private RectangleF footerRect = new RectangleF(leftMargin, 270, paperWidth - leftMargin, 27);
+        /// <summary>
+        /// The hands
+        /// </summary>
+        private DoubleHand hands = new DoubleHand();
+        /// <summary>
+        /// The graphic ID card grid or image
+        /// </summary>
+        private GraphicIDGrid graphicIDGrid = new GraphicIDGrid();
+        /// <summary>
+        /// The locale picture
+        /// </summary>
+        private GraphicLocalePicture graphicLocPic = new GraphicLocalePicture();
         #endregion
 
         #region Public Property
-
+        /// <summary>
+        /// Gets or sets the hands.
+        /// </summary>
+        /// <value>
+        /// The hands.
+        /// </value>
+        public DoubleHand Hands
+        {
+            get
+            {
+                return hands;
+            }
+            set
+            {
+                hands = value;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public GraphicIDGrid GraphicIDGrid
+        {
+            get { return graphicIDGrid; }
+            set { graphicIDGrid = value; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public GraphicLocalePicture GraphicLocPic
+        {
+            get { return graphicLocPic; }
+            set { graphicLocPic = value; }
+        }
         #endregion
 
         #region Constructor
@@ -67,25 +134,41 @@ namespace YDT.WinForm.Model
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        public void Draw(System.Drawing.Graphics g, IDocument doc)
+        public void Draw(System.Drawing.Graphics g)
         {
-            DrawReportBorder(g, doc);
-            DrawPageHeader(g, doc);
-            DrawTitle(g, doc);
-            DrawGridInfo(g, doc);
-            DrawHands(g, doc);
-            DrawPageFooter(g, doc);
+            DrawGutter(g);
+            // DrawReportBorder(g);
+            DrawPageHeader(g);
+            DrawTitle(g);
+            DrawGridInfo(g);
+            DrawHands(g);
+            DrawLocPic(g);
+            DrawPageFooter(g);
         }
 
         #endregion
 
         #region Drawing Method
         /// <summary>
+        /// DrawGutter
+        /// </summary>
+        /// <param name="g"></param>
+        private void DrawGutter(Graphics g)
+        {
+            StringFormat strFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center,
+                FormatFlags = StringFormatFlags.DirectionVertical,
+            };
+            GenerateRectangleString(g, "···········装···········订···········线···········", gutterFont, gutterBrush, strFormat, gutterRect, false);
+        }
+        /// <summary>
         /// DrawReportBorder
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawReportBorder(Graphics g, IDocument doc)
+        private void DrawReportBorder(Graphics g)
         {
             g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(new RectangleF(0, 0, paperWidth, paperHeight)));
             // Draw background
@@ -96,116 +179,119 @@ namespace YDT.WinForm.Model
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawTitle(Graphics g, IDocument doc)
+        private void DrawTitle(Graphics g)
         {
             var drawRect = titleRect;
-            if (doc != null && doc.Setting != null)
+            StringFormat strFormat = new StringFormat()
             {
-                var titleContent = doc.Setting.ReportTitle;
-                StringFormat strFormat = new StringFormat()
-                {
-                    Alignment = StringAlignment.Center,
-                    LineAlignment = StringAlignment.Center,
-                };
-                GenerateRectangleString(g, titleContent, titleFont, normalBrush, strFormat, drawRect, false);
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center,
+            };
+            GenerateRectangleString(g, DocSetting.Instance.ReportTitle, titleFont, normalBrush, strFormat, drawRect, false);
 
-                g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(drawRect));
-            }
+            // g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(drawRect));
         }
         /// <summary>
         /// DrawHandImages
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawHands(Graphics g, IDocument doc)
+        private void DrawHands(Graphics g)
         {
-            if(doc !=null && doc.Hands != null)
+            if (this.hands != null)
             {
-                doc.Hands.Draw(g, fingerRect);
-            } 
+                this.hands.Draw(g, fingerRect);
+            }
+        }
+        /// <summary>
+        /// DrawLocalePicture
+        /// </summary>
+        /// <param name="g"></param>
+        private void DrawLocPic(Graphics g)
+        {
+            if (this.graphicLocPic != null)
+            {
+                this.graphicLocPic.Draw(g, locPicRect);
+            }
         }
         /// <summary>
         /// DrawGridInfo
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawGridInfo(Graphics g, IDocument doc)
+        private void DrawGridInfo(Graphics g)
         {
-            var drawRect = gridRect;
-
-            var gridMarginX = 0;
-            var gridMarginY = 0;
-            var gridRaws = 3;
-            var gridColums = 3;
-            RectangleF[,] gridRects = new RectangleF[gridRaws, gridColums];
-            var gridCellWidth = (int)((drawRect.Width - gridMarginX * 2) / (float)gridRaws);
-            var gridCellHeight = (int)((drawRect.Height - gridMarginY * 2) / (float)gridColums);
-
-            // create grid cells
-            for (int i = 0; i < gridRaws; i++)
+            if (this.graphicIDGrid != null)
             {
-                for (int j = 0; j < gridColums; j++)
-                {
-                    gridRects[i, j] = new RectangleF(gridMarginX + drawRect.X + j % gridColums * gridCellWidth, gridMarginY + drawRect.Y + i % gridRaws * gridCellHeight, gridCellWidth, gridCellHeight);
-                }
+                this.graphicIDGrid.Draw(g, gridRect);
             }
 
-            // draw grid infomation
-            if (doc != null && doc.Setting != null)
-            {
-                StringFormat strFormat = new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center, };
-                GenerateRectangleString(g, string.Format("申请人: {0}", doc.Setting.CurCustomer.Name), gridFont, normalBrush, strFormat, gridRects[0, 0], true);
-                GenerateRectangleString(g, string.Format("性别: {0}", doc.Setting.CurCustomer.Sex), gridFont, normalBrush, strFormat, gridRects[0, 1], true);
-                GenerateRectangleString(g, string.Format("出生日期: {0}", doc.Setting.CurCustomer.Birthday), gridFont, normalBrush, strFormat, gridRects[0, 2], true);
-                GenerateRectangleString(g, string.Format("国籍: {0}", doc.Setting.CurCustomer.Nationality), gridFont, normalBrush, strFormat, gridRects[1, 0], true);
-                GenerateRectangleString(g, string.Format("身份证(护照)号码: {0}", doc.Setting.CurCustomer.IDCard), gridFont, normalBrush, strFormat, RectangleF.Union(gridRects[1, 1], gridRects[1, 2]), true);
-                GenerateRectangleString(g, string.Format("时间: {0}", doc.Setting.CurCustomer.Time), gridFont, normalBrush, strFormat, gridRects[2, 0], true);
-                GenerateRectangleString(g, string.Format("地点: {0}", doc.Setting.CurCustomer.Address), gridFont, normalBrush, strFormat, RectangleF.Union(gridRects[2, 1], gridRects[2, 2]), true);
-            }
+            //var gridMarginX = 0;
+            //var gridMarginY = 0;
+            //var gridRaws = 3;
+            //var gridColums = 3;
+            //RectangleF[,] gridRects = new RectangleF[gridRaws, gridColums];
+            //var gridCellWidth = (int)((drawRect.Width - gridMarginX * 2) / (float)gridRaws);
+            //var gridCellHeight = (int)((drawRect.Height - gridMarginY * 2) / (float)gridColums);
+
+            //// create grid cells
+            //for (int i = 0; i < gridRaws; i++)
+            //{
+            //    for (int j = 0; j < gridColums; j++)
+            //    {
+            //        gridRects[i, j] = new RectangleF(gridMarginX + drawRect.X + j % gridColums * gridCellWidth, gridMarginY + drawRect.Y + i % gridRaws * gridCellHeight, gridCellWidth, gridCellHeight);
+            //    }
+            //}
+
+            //// draw grid infomation
+            //if (doc != null && doc.Setting != null)
+            //{
+            //    StringFormat strFormat = new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center, };
+            //    GenerateRectangleString(g, string.Format("申请人: {0}", doc.Setting.CurCustomer.Name), gridFont, normalBrush, strFormat, gridRects[0, 0], true);
+            //    GenerateRectangleString(g, string.Format("性别: {0}", doc.Setting.CurCustomer.Sex), gridFont, normalBrush, strFormat, gridRects[0, 1], true);
+            //    GenerateRectangleString(g, string.Format("出生日期: {0}", doc.Setting.CurCustomer.Birthday), gridFont, normalBrush, strFormat, gridRects[0, 2], true);
+            //    GenerateRectangleString(g, string.Format("国籍: {0}", doc.Setting.CurCustomer.Nationality), gridFont, normalBrush, strFormat, gridRects[1, 0], true);
+            //    GenerateRectangleString(g, string.Format("身份证(护照)号码: {0}", doc.Setting.CurCustomer.IDCard), gridFont, normalBrush, strFormat, RectangleF.Union(gridRects[1, 1], gridRects[1, 2]), true);
+            //    GenerateRectangleString(g, string.Format("时间: {0}", doc.Setting.CurCustomer.Time), gridFont, normalBrush, strFormat, gridRects[2, 0], true);
+            //    GenerateRectangleString(g, string.Format("地点: {0}", doc.Setting.CurCustomer.Address), gridFont, normalBrush, strFormat, RectangleF.Union(gridRects[2, 1], gridRects[2, 2]), true);
+            //}
         }
         /// <summary>
         /// DrawPageFooter
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawPageFooter(Graphics g, IDocument doc)
+        private void DrawPageFooter(Graphics g)
         {
             var drawRect = footerRect;
 
             g.DrawLine(LinePen, PrintHelper.MillimetreToPixel(new Point(10, (int)drawRect.Top)), PrintHelper.MillimetreToPixel(new Point((int)drawRect.Width - 10, (int)drawRect.Top)));
 
-            if (doc != null && doc.Setting != null)
+            StringFormat strFormat = new StringFormat()
             {
-                var footerContent = doc.Setting.ReportFooter;
-                StringFormat strFormat = new StringFormat()
-                {
-                    Alignment = StringAlignment.Center,
-                    LineAlignment = StringAlignment.Center,
-                };
-                GenerateRectangleString(g, footerContent, normalFont, normalBrush, strFormat, drawRect, false);
-            }
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center,
+            };
+            GenerateRectangleString(g, DocSetting.Instance.ReportFooter, normalFont, normalBrush, strFormat, drawRect, false);
         }
         /// <summary>
         /// DrawPageHeader
         /// </summary>
         /// <param name="g"></param>
         /// <param name="doc"></param>
-        private void DrawPageHeader(Graphics g, IDocument doc)
+        private void DrawPageHeader(Graphics g)
         {
             var drawRect = headerRect;
 
             //g.DrawLine(LinePen, PrintHelper.MillimetreToPixel(new Point(10, (int)drawRect.Top)), PrintHelper.MillimetreToPixel(new Point((int)drawRect.Width - 10, (int)drawRect.Top)));
 
-            if (doc != null && doc.Setting != null)
+            StringFormat strFormat = new StringFormat()
             {
-                var headerContent = doc.Setting.ReportHeader;
-                StringFormat strFormat = new StringFormat()
-                {
-                    Alignment = StringAlignment.Near,
-                    LineAlignment = StringAlignment.Center,
-                };
-                GenerateRectangleString(g, headerContent, normalFont, normalBrush, strFormat, drawRect, false);
-            }
+                Alignment = StringAlignment.Near,
+                LineAlignment = StringAlignment.Center,
+            };
+            GenerateRectangleString(g, DocSetting.Instance.ReportHeader, normalFont, normalBrush, strFormat, drawRect, false);
+
         }
         /// <summary>
         /// GenerateRectangleString

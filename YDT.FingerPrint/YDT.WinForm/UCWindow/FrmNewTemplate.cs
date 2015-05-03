@@ -12,10 +12,8 @@ using YDT.WinForm.Model;
 namespace YDT.WinForm.UCWindow
 {
     public partial class FrmNewTemplate : Form
-    {
-        public Model.DocSetting Setting { get; set; }
-
-        public Common.IReportTemplate Template { get; set; }
+    {  
+        public UCControl.DocumentControl TemplateControl { get; set; }
 
         public FrmNewTemplate()
         {
@@ -30,37 +28,19 @@ namespace YDT.WinForm.UCWindow
             this.Txb_ReportFooter.Text = set.ReportFooter;
             this.Txb_ReportTitle.Text = set.ReportTitle;
             this.Txb_ReportPrefix.Text = set.ReportNamePrefix;
+
+            this.Cbb_Templates.SelectedText = "通用模板1";
         }
 
         private void Btn_OK_Click(object sender, EventArgs e)
-        {
-            // TODO: need to do setting check
-            if (string.IsNullOrEmpty(this.Txb_Name.Text))
-            {
-                MessageBox.Show("姓名不能为空，请填写。", "提示");
-                return;
-            }
-
-            Setting = DocSetting.Instance;
-            Setting.ReportHeader = this.Txb_ReportHeader.Text;
-            Setting.ReportFooter = this.Txb_ReportFooter.Text;
-            Setting.ReportTitle = this.Txb_ReportTitle.Text;
-            Setting.ReportNamePrefix = this.Txb_ReportPrefix.Text;
-
-            Setting.CurCustomer = new Customer()
-            {
-                Address = this.Txb_Address.Text,
-                Age = this.Txb_Age.Text,
-                Birthday = this.Txb_Birthday.Text,
-                IDCard = this.Txb_IDCard.Text,
-                Name = this.Txb_Name.Text,
-                Nationality = this.Txb_National.Text,
-                Sex = this.Txb_Sex.Text,
-                Time = string.Format("{0}年{1}月{2}日", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),// This is for non Chinese language in OS.
-            };
+        {   
+            DocSetting.Instance.ReportHeader = this.Txb_ReportHeader.Text;
+            DocSetting.Instance.ReportFooter = this.Txb_ReportFooter.Text;
+            DocSetting.Instance.ReportTitle = this.Txb_ReportTitle.Text;
+            DocSetting.Instance.ReportNamePrefix = this.Txb_ReportPrefix.Text;
             DocSetting.Save();
-
-            Template = new ReportTemplate();
+             
+            TemplateControl = new UCControl.DocumentControl();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 

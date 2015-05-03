@@ -9,24 +9,18 @@ using System.Windows.Forms;
 using YDT.WinForm.UCBase;
 using YDT.WinForm.Common;
 using YDT.WinForm.Utlity;
+using YDT.WinForm.Model;
 
 namespace YDT.WinForm.UCControl
 {
     public partial class DocumentControl : DockChildEx
     {
         #region Private Property
-        private IDocument content;
+        private ReportTemplate report = new ReportTemplate();
         #endregion
 
         #region Public Property
-        /// <summary>
-        /// Content
-        /// </summary>
-        public IDocument Content
-        {
-            get { return content; }
-            set { content = value; }
-        }
+        public string ReportName { get; set; }
         #endregion
 
         #region Constructure
@@ -45,12 +39,7 @@ namespace YDT.WinForm.UCControl
         /// </summary>
         public void DocumentPrintPreview()
         {
-            var ReportName = "指纹打印文件";
-            if (Content != null && Content.Setting != null)
-            {
-                ReportName = string.Format("{0}_{1}_{2}", Content.Setting.ReportNamePrefix, Content.Setting.CurCustomer.Name, Content.Setting.CurCustomer.Time);
-            }
-
+            ReportName = string.Format("{0}_{1}_{2}", DocSetting.Instance.ReportNamePrefix, this.Txb_Name.Text.TrimEnd(), DateTime.Now.ToShortDateString());
             printDocument1.DocumentName = ReportName;
             printDocument1.DefaultPageSettings = new System.Drawing.Printing.PageSettings()
             {
@@ -67,19 +56,30 @@ namespace YDT.WinForm.UCControl
         /// <param name="g"></param>
         public void DrawReportImage(Graphics g)
         {
-            content.Hands.AddFinger((this.Tlt_LeftHand.Controls[0] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_LeftHand.Controls[1] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_LeftHand.Controls[2] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_LeftHand.Controls[3] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_LeftHand.Controls[4] as FingerControl).Fprint);
+            //report.GraphicIDGrid.Image = new Bitmap(200, 200);
+            report.GraphicIDGrid.ApplicantAddr = this.Txb_Addr.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantAge = this.Txb_Age.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantBirth = this.Txb_Birth.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantID = this.Txb_IDCard.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantName = this.Txb_Name.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantNationality = this.Txb_Country.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantSex = this.Txb_Sex.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantTime = this.Txb_Time.Text.TrimEnd();
 
-            content.Hands.AddFinger((this.Tlt_RightHand.Controls[0] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_RightHand.Controls[1] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_RightHand.Controls[2] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_RightHand.Controls[3] as FingerControl).Fprint);
-            content.Hands.AddFinger((this.Tlt_RightHand.Controls[4] as FingerControl).Fprint);
+            //report.GraphicLocPic.Image = new Bitmap(200, 200);
 
-            content.DrawItems(g);
+            report.Hands.AddFinger((this.Tlt_LeftHand.Controls[0] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_LeftHand.Controls[1] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_LeftHand.Controls[2] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_LeftHand.Controls[3] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_LeftHand.Controls[4] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_RightHand.Controls[0] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_RightHand.Controls[1] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_RightHand.Controls[2] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_RightHand.Controls[3] as FingerControl).Fprint);
+            report.Hands.AddFinger((this.Tlt_RightHand.Controls[4] as FingerControl).Fprint);
+
+            report.Draw(g);
         }
         #endregion
 
@@ -94,10 +94,10 @@ namespace YDT.WinForm.UCControl
 
             base.OnClosing(e);
 
-            if (content != null)
+            if (report != null)
             {
-                content.Dispose();
-                content = null;
+                report.Dispose();
+                report = null;
             }
         }
         /// <summary>
@@ -109,15 +109,7 @@ namespace YDT.WinForm.UCControl
         {
             this.printPreviewDialog1 = new PrintPreviewDialog();
 
-            if (content != null && content.Setting != null)
-            {
-                this.Text = string.IsNullOrEmpty(Content.Setting.CurCustomer.Name) ? "[默认工作区]" : Content.Setting.CurCustomer.Name; // Set workspace title
-                this.Lbl_Name.Text = Content.Setting.CurCustomer.Name;
-                this.Lbl_Addr.Text = Content.Setting.CurCustomer.Address;
-                this.Lbl_IDCard.Text = Content.Setting.CurCustomer.IDCard;
-                this.Lbl_Time.Text = Content.Setting.CurCustomer.Time;
-            }
-
+            this.Text = "[默认工作区]";
             this.Tlt_LeftHand.Controls.Add(new FingerControl(Finger.LeftThumb), 0, 0);
             this.Tlt_LeftHand.Controls.Add(new FingerControl(Finger.LeftForeFinger), 2, 0);
             this.Tlt_LeftHand.Controls.Add(new FingerControl(Finger.LeftMiddleFinger), 4, 0);

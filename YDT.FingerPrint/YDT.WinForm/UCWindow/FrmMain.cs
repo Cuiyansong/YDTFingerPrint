@@ -61,17 +61,7 @@ namespace YDT.WinForm.UCWindow
             using (var frm = new FrmNewTemplate())
                 if (DialogResult.OK == frm.ShowDialog())
                 {
-                    var docContent = new DocumentControl()
-                    {
-                        Content = new Document()
-                            {
-                                Hands = new DoubleHand(),
-                                Setting = frm.Setting.Clone() as DocSetting,
-                                Template = frm.Template,
-                            }
-                    };
-
-                    docContent.Show(this.dockPanelEx1, WeifenLuo.WinFormsUI.Docking.DockState.Document);
+                    frm.TemplateControl.Show(this.dockPanelEx1, WeifenLuo.WinFormsUI.Docking.DockState.Document);
                 }
         }
         /// <summary>
@@ -133,16 +123,10 @@ namespace YDT.WinForm.UCWindow
                 return;
             }
 
-            var docCtrl = docContent as DocumentControl;
-            var ReportName = "PDF图片";
-            if (docCtrl.Content != null && docCtrl.Content.Setting != null)
-            {
-                ReportName = string.Format("{0}_{1}_{2}", docCtrl.Content.Setting.ReportNamePrefix, docCtrl.Content.Setting.CurCustomer.Name, docCtrl.Content.Setting.CurCustomer.Time);
-            }
-
+            var docCtrl = docContent as DocumentControl; 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = Application.StartupPath;
-            saveFileDialog1.FileName = ReportName;
+            saveFileDialog1.FileName = docCtrl.ReportName;
             saveFileDialog1.Filter = "PDF|*.pdf";
             saveFileDialog1.Title = "保存PDF";
             var result = saveFileDialog1.ShowDialog();
@@ -154,7 +138,7 @@ namespace YDT.WinForm.UCWindow
                     Bitmap bmp = new Bitmap((int)PrintHelper.MillimetreToPixel(GlobalSetting.DefaultPrintPageSizeMM.Width), (int)PrintHelper.MillimetreToPixel(GlobalSetting.DefaultPrintPageSizeMM.Height));
                     Graphics g = Graphics.FromImage(bmp);
                     docCtrl.DrawReportImage(g);
-                   
+
                     iTextSharp.text.Rectangle rr = new iTextSharp.text.Rectangle((int)PrintHelper.MillimetreToPixel(GlobalSetting.DefaultPrintPageSizeMM.Width), (int)PrintHelper.MillimetreToPixel(GlobalSetting.DefaultPrintPageSizeMM.Height));
                     iTextSharp.text.Document document = new iTextSharp.text.Document(rr);
                     try
@@ -186,16 +170,10 @@ namespace YDT.WinForm.UCWindow
                 return;
             }
 
-            var docCtrl = docContent as DocumentControl;
-            var ReportName = "指纹图片";
-            if (docCtrl.Content != null && docCtrl.Content.Setting != null)
-            {
-                ReportName = string.Format("{0}_{1}_{2}", docCtrl.Content.Setting.ReportNamePrefix, docCtrl.Content.Setting.CurCustomer.Name, docCtrl.Content.Setting.CurCustomer.Time);
-            }
-
+            var docCtrl = docContent as DocumentControl; 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.InitialDirectory = Application.StartupPath;
-            saveFileDialog1.FileName = ReportName;
+            saveFileDialog1.FileName = docCtrl.ReportName;
             saveFileDialog1.Filter = "Bitmap Image|*.bmp";
             saveFileDialog1.Title = "保存图像";
             var result = saveFileDialog1.ShowDialog();

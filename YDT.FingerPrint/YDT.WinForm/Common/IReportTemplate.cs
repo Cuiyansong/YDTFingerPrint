@@ -5,8 +5,8 @@ using System.Text;
 
 namespace YDT.WinForm.Common
 {
-    public interface IReportTemplate
-    {  
-        void Draw(System.Drawing.Graphics g, IDocument doc); 
+    public interface IReportTemplate : IDisposable
+    {
+        void Draw(System.Drawing.Graphics g);
     }
 }

@@ -76,13 +76,13 @@ namespace YDT.WinForm.Model
             if (fingers != null && fingers.Count > 0)
             {
                 int index = 0;
+                float cellWidth = rectF.Width / 5;
+                float cellHeight = rectF.Height / 2;
                 foreach (KeyValuePair<Finger, GraphicFinger> item in fingers)
                 {
                     if (item.Value != null)
-                    {
-                        float cellWidth = rectF.Width / 5;
-                        float cellHeight = rectF.Height / 2;
-                        item.Value.Draw(g, new RectangleF(rectF.X + index % 5 * cellWidth, rectF.Y + index / 5 * cellHeight, cellWidth, cellHeight));
+                    { 
+                        item.Value.Draw(g, new RectangleF(rectF.X + (int)(index % 5 * cellWidth), (int)(rectF.Y + index / 5 * cellHeight), cellWidth, cellHeight));
                         index++;
                     }
                 }

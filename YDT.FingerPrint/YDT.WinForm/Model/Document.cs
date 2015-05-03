@@ -7,11 +7,9 @@ using YDT.WinForm.Common;
 
 namespace YDT.WinForm.Model
 {
-    public class Document : IDocument, IDisposable
+    public class Document : IDisposable
     {
         #region Private Property
-        private DoubleHand hands;
-        private DocSetting setting;
         private IReportTemplate template;
         #endregion
 
@@ -25,8 +23,7 @@ namespace YDT.WinForm.Model
         /// </summary>
         public Document()
         {
-            hands = new DoubleHand();
-            setting = new DocSetting();
+
         }
         #endregion
 
@@ -73,10 +70,10 @@ namespace YDT.WinForm.Model
             }
             if (disposing)
             {
-                // 清理托管资源
-                if (Hands != null)
+                if (template != null)
                 {
-                    Hands.Dispose();
+                    template.Dispose();
+                    template = null;
                 }
 
             }
@@ -98,8 +95,8 @@ namespace YDT.WinForm.Model
         public void DrawItems(System.Drawing.Graphics g)
         {
             if (template != null)
-            { 
-                template.Draw(g, this);
+            {
+                template.Draw(g);
             }
         }
         #endregion
@@ -120,39 +117,7 @@ namespace YDT.WinForm.Model
             get { return template; }
             set { template = value; }
         }
-        /// <summary>
-        /// Setting
-        /// </summary>
-        public DocSetting Setting
-        {
-            get
-            {
-                return setting;
-            }
-            set
-            {
-                setting = value;
-            }
-        }
-        /// <summary>
-        /// Gets or sets the hands.
-        /// </summary>
-        /// <value>
-        /// The hands.
-        /// </value>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public DoubleHand Hands
-        {
-            get
-            {
-                return hands;
-            }
-            set
-            {
-                hands = value;
-            }
-        }
+
         #endregion
     }
 }

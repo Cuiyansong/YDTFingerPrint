@@ -42,6 +42,7 @@ namespace YDT.WinForm.UCControl
                 {
                     fprint.Identify = System.Guid.NewGuid().ToString("N");
                     fprint.Image = Image.FromHbitmap(tesoMgmt.CurImg.GetHbitmap());
+                    this.Pcb_Finger.SizeMode = PictureBoxSizeMode.StretchImage;
                     this.Pcb_Finger.Image = Image.FromHbitmap(tesoMgmt.CurImg.GetHbitmap());
                 }
                 //if (tesoMgmt.GetFingerImage())

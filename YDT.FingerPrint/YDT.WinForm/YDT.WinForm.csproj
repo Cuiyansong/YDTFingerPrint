@@ -65,12 +65,14 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\GlobalSetting.cs" />
     <Compile Include="Common\IReportTemplate.cs" />
+    <Compile Include="Common\TextValidationAttribute.cs" />
     <Compile Include="Graphic\GraphicBase.cs" />
+    <Compile Include="Graphic\GraphicIDGrid.cs" />
+    <Compile Include="Graphic\GraphicLocalePicture.cs" />
     <Compile Include="Model\DocSetting.cs" />
     <Compile Include="Model\DoubleHand.cs" />
     <Compile Include="Common\FingerDescriptionAttribute.cs" />
     <Compile Include="Common\StringConstant.cs" />
-    <Compile Include="Common\IDocument.cs" />
     <Compile Include="Common\TesoDevMgmt.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Model\Document.cs" />

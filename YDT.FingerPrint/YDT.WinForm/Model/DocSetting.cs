@@ -28,13 +28,13 @@ namespace YDT.WinForm.Model
         [XmlElementAttribute("ReportNamePrefix")]
         public string ReportNamePrefix { get; set; }
 
-        // [XmlElementAttribute("CurCustomer", IsNullable = false)]
-        [XmlIgnoreAttribute]
-        public Customer CurCustomer { get; set; }
+        //// [XmlElementAttribute("CurCustomer", IsNullable = false)]
+        //[XmlIgnoreAttribute]
+        //public Customer CurCustomer { get; set; }
 
         public DocSetting()
         {
-            CurCustomer = new Customer();
+           // CurCustomer = new Customer();
         }
 
         #region Public Method

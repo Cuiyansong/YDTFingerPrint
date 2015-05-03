@@ -16,6 +16,12 @@ namespace YDT.WinForm.Graphic
         protected StringFormat CenterFormat = new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center, };
 
         /// <summary>
+        /// The left format equal to
+        /// "Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center"
+        /// </summary>
+        protected StringFormat LeftFormat = new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center, };
+
+        /// <summary>
         /// Draws the specified g.
         /// </summary>
         /// <param name="g">The g.</param>

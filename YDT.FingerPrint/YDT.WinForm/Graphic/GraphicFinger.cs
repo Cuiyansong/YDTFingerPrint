@@ -59,8 +59,8 @@ namespace YDT.WinForm.Graphic
         /// <summary>
         /// Initializes a new instance of the <see cref="GraphicFinger"/> class.
         /// </summary>
-        public GraphicFinger() 
-        { 
+        public GraphicFinger()
+        {
 #if DEBUG
             Remark = "Debug Mode: 无指纹图片";
 #endif
