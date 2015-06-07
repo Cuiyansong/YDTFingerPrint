@@ -181,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logo.ico" />
+    <Content Include="sdtapi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\ReadMe.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -195,6 +198,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\02.Infrastructure\SDTTeleComLib\SDTTeleComLib.csproj">
+      <Project>{a73cf3e1-19d0-4e2f-a5f9-6a06e64836c8}</Project>
+      <Name>SDTTeleComLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\02.Infrastructure\TesoTellerIntDevice\TesoTellerIntDevice.csproj">
       <Project>{733e4093-a38e-47b4-b4a1-06341e56bfa1}</Project>
       <Name>TesoTellerIntDevice</Name>

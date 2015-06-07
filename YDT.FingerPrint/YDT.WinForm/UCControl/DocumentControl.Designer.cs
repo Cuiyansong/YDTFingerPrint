@@ -72,6 +72,8 @@
             this.Txb_Addr = new System.Windows.Forms.TextBox();
             this.Txb_Time = new System.Windows.Forms.TextBox();
             this.Txb_Country = new System.Windows.Forms.TextBox();
+            this.Btn_ReadIDCard = new System.Windows.Forms.Button();
+            this.Pic_user = new System.Windows.Forms.PictureBox();
             this.Tab_LocPic = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Tab_IDPic = new System.Windows.Forms.TabPage();
@@ -83,12 +85,14 @@
             this.tabControl1.SuspendLayout();
             this.Tab_IDCard.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_user)).BeginInit();
             this.Tab_LocPic.SuspendLayout();
             this.Tab_IDPic.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.LightGray;
             this.groupBox2.Controls.Add(this.Tlt_RightHand);
             this.groupBox2.Location = new System.Drawing.Point(4, 450);
             this.groupBox2.Name = "groupBox2";
@@ -208,6 +212,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.LightGray;
             this.groupBox1.Controls.Add(this.Tlt_LeftHand);
             this.groupBox1.Location = new System.Drawing.Point(2, 253);
             this.groupBox1.Name = "groupBox1";
@@ -240,6 +245,7 @@
             // 
             // Tab_IDCard
             // 
+            this.Tab_IDCard.BackColor = System.Drawing.Color.LightGray;
             this.Tab_IDCard.Controls.Add(this.tableLayoutPanel3);
             this.Tab_IDCard.Location = new System.Drawing.Point(4, 22);
             this.Tab_IDCard.Name = "Tab_IDCard";
@@ -247,13 +253,13 @@
             this.Tab_IDCard.Size = new System.Drawing.Size(1003, 204);
             this.Tab_IDCard.TabIndex = 0;
             this.Tab_IDCard.Text = "身份信息";
-            this.Tab_IDCard.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnCount = 4;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 330F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 330F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 1);
@@ -271,6 +277,8 @@
             this.tableLayoutPanel3.Controls.Add(this.Txb_Addr, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.Txb_Time, 1, 6);
             this.tableLayoutPanel3.Controls.Add(this.Txb_Country, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.Btn_ReadIDCard, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.Pic_user, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -378,78 +386,108 @@
             // 
             // Txb_Name
             // 
+            this.Txb_Name.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Name.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Name.Location = new System.Drawing.Point(153, 3);
             this.Txb_Name.Name = "Txb_Name";
-            this.Txb_Name.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Name.Size = new System.Drawing.Size(324, 21);
             this.Txb_Name.TabIndex = 8;
             // 
             // Txb_Age
             // 
+            this.Txb_Age.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Age.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Age.Location = new System.Drawing.Point(153, 23);
             this.Txb_Age.Name = "Txb_Age";
-            this.Txb_Age.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Age.Size = new System.Drawing.Size(324, 21);
             this.Txb_Age.TabIndex = 9;
             // 
             // Txb_Birth
             // 
+            this.Txb_Birth.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Birth.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Birth.Location = new System.Drawing.Point(153, 43);
             this.Txb_Birth.Name = "Txb_Birth";
-            this.Txb_Birth.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Birth.Size = new System.Drawing.Size(324, 21);
             this.Txb_Birth.TabIndex = 10;
             // 
             // Txb_Sex
             // 
+            this.Txb_Sex.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Sex.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Sex.Location = new System.Drawing.Point(153, 63);
             this.Txb_Sex.Name = "Txb_Sex";
-            this.Txb_Sex.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Sex.Size = new System.Drawing.Size(324, 21);
             this.Txb_Sex.TabIndex = 11;
             // 
             // Txb_IDCard
             // 
+            this.Txb_IDCard.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_IDCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_IDCard.Location = new System.Drawing.Point(153, 83);
             this.Txb_IDCard.Name = "Txb_IDCard";
-            this.Txb_IDCard.Size = new System.Drawing.Size(294, 21);
+            this.Txb_IDCard.Size = new System.Drawing.Size(324, 21);
             this.Txb_IDCard.TabIndex = 12;
             // 
             // Txb_Addr
             // 
+            this.Txb_Addr.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Addr.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Addr.Location = new System.Drawing.Point(153, 103);
             this.Txb_Addr.Name = "Txb_Addr";
-            this.Txb_Addr.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Addr.Size = new System.Drawing.Size(324, 21);
             this.Txb_Addr.TabIndex = 13;
             // 
             // Txb_Time
             // 
+            this.Txb_Time.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Time.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Time.Location = new System.Drawing.Point(153, 123);
             this.Txb_Time.Name = "Txb_Time";
-            this.Txb_Time.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Time.Size = new System.Drawing.Size(324, 21);
             this.Txb_Time.TabIndex = 14;
             // 
             // Txb_Country
             // 
+            this.Txb_Country.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Txb_Country.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Txb_Country.Location = new System.Drawing.Point(153, 143);
             this.Txb_Country.Name = "Txb_Country";
-            this.Txb_Country.Size = new System.Drawing.Size(294, 21);
+            this.Txb_Country.Size = new System.Drawing.Size(324, 21);
             this.Txb_Country.TabIndex = 15;
+            // 
+            // Btn_ReadIDCard
+            // 
+            this.Btn_ReadIDCard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Btn_ReadIDCard.Location = new System.Drawing.Point(813, 3);
+            this.Btn_ReadIDCard.Name = "Btn_ReadIDCard";
+            this.tableLayoutPanel3.SetRowSpan(this.Btn_ReadIDCard, 8);
+            this.Btn_ReadIDCard.Size = new System.Drawing.Size(181, 154);
+            this.Btn_ReadIDCard.TabIndex = 16;
+            this.Btn_ReadIDCard.Text = "读取身份证信息";
+            this.Btn_ReadIDCard.UseVisualStyleBackColor = true;
+            this.Btn_ReadIDCard.Click += new System.EventHandler(this.Btn_ReadIDCard_Click);
+            // 
+            // Pic_user
+            // 
+            this.Pic_user.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Pic_user.Location = new System.Drawing.Point(483, 3);
+            this.Pic_user.Name = "Pic_user";
+            this.tableLayoutPanel3.SetRowSpan(this.Pic_user, 8);
+            this.Pic_user.Size = new System.Drawing.Size(324, 154);
+            this.Pic_user.TabIndex = 17;
+            this.Pic_user.TabStop = false;
             // 
             // Tab_LocPic
             // 
+            this.Tab_LocPic.BackColor = System.Drawing.Color.LightGray;
             this.Tab_LocPic.Controls.Add(this.tableLayoutPanel2);
             this.Tab_LocPic.Location = new System.Drawing.Point(4, 22);
             this.Tab_LocPic.Name = "Tab_LocPic";
             this.Tab_LocPic.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_LocPic.Size = new System.Drawing.Size(1003, 263);
+            this.Tab_LocPic.Size = new System.Drawing.Size(1003, 204);
             this.Tab_LocPic.TabIndex = 1;
             this.Tab_LocPic.Text = "现场照片";
-            this.Tab_LocPic.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -462,19 +500,19 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(997, 257);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(997, 198);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // Tab_IDPic
             // 
+            this.Tab_IDPic.BackColor = System.Drawing.Color.LightGray;
             this.Tab_IDPic.Controls.Add(this.tableLayoutPanel1);
             this.Tab_IDPic.Location = new System.Drawing.Point(4, 22);
             this.Tab_IDPic.Name = "Tab_IDPic";
             this.Tab_IDPic.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_IDPic.Size = new System.Drawing.Size(1003, 263);
+            this.Tab_IDPic.Size = new System.Drawing.Size(1003, 204);
             this.Tab_IDPic.TabIndex = 2;
             this.Tab_IDPic.Text = "身份照片";
-            this.Tab_IDPic.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -487,7 +525,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(997, 257);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(997, 198);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // openFileDialog1
@@ -498,6 +536,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1011, 638);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
@@ -514,6 +553,7 @@
             this.Tab_IDCard.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_user)).EndInit();
             this.Tab_LocPic.ResumeLayout(false);
             this.Tab_IDPic.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -554,5 +594,7 @@
         private System.Windows.Forms.TextBox Txb_Addr;
         private System.Windows.Forms.TextBox Txb_Time;
         private System.Windows.Forms.TextBox Txb_Country;
+        private System.Windows.Forms.Button Btn_ReadIDCard;
+        private System.Windows.Forms.PictureBox Pic_user;
     }
 }

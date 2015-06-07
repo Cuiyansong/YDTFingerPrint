@@ -10,12 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Dependency", "01.Depende
 		01.Dependency\itextsharp.dll = 01.Dependency\itextsharp.dll
 		01.Dependency\log4net.dll = 01.Dependency\log4net.dll
 		01.Dependency\Newtonsoft.Json.dll = 01.Dependency\Newtonsoft.Json.dll
+		01.Dependency\sdtapi.dll = 01.Dependency\sdtapi.dll
 		01.Dependency\WeifenLuo.WinFormsUI.Docking.dll = 01.Dependency\WeifenLuo.WinFormsUI.Docking.dll
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Infrastructure", "02.Infrastructure", "{31F52D9A-EAF3-4604-8764-D23828EC63CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesoTellerIntDevice", "02.Infrastructure\TesoTellerIntDevice\TesoTellerIntDevice.csproj", "{733E4093-A38E-47B4-B4A1-06341E56BFA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDTTeleComLib", "02.Infrastructure\SDTTeleComLib\SDTTeleComLib.csproj", "{A73CF3E1-19D0-4E2F-A5F9-6A06E64836C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,11 +34,16 @@ Global
 		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{733E4093-A38E-47B4-B4A1-06341E56BFA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A73CF3E1-19D0-4E2F-A5F9-6A06E64836C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A73CF3E1-19D0-4E2F-A5F9-6A06E64836C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A73CF3E1-19D0-4E2F-A5F9-6A06E64836C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A73CF3E1-19D0-4E2F-A5F9-6A06E64836C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{733E4093-A38E-47B4-B4A1-06341E56BFA1} = {31F52D9A-EAF3-4604-8764-D23828EC63CE}
+		{A73CF3E1-19D0-4E2F-A5F9-6A06E64836C8} = {31F52D9A-EAF3-4604-8764-D23828EC63CE}
 	EndGlobalSection
 EndGlobal

@@ -132,7 +132,7 @@ namespace YDT.WinForm.UCControl
             DrawReportImage(e.Graphics);
         }
         /// <summary>
-        /// button1_Click
+        /// Button preview click
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -140,7 +140,35 @@ namespace YDT.WinForm.UCControl
         {
             this.DocumentPrintPreview();
         }
+        /// <summary>
+        /// Handles the Click event of the Btn_ReadIDCard control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void Btn_ReadIDCard_Click(object sender, EventArgs e)
+        {
+            using (var idCardWrapper = new SDTTeleComLib.SDTDLLWrapper())
+            {
+                try
+                {
+                    var success = idCardWrapper.ReadIDCard();
+                    if (!success)
+                    {
+                        MessageBox.Show("读取身份证信息失败，请检查仪器是否已正确连接。");
+                    }
+                    else
+                    {
+                        this.Txb_Addr.Text = idCardWrapper.PucCHMsg;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("读取身份证信息失败，" + ex.Message);
+                }
+            }
+        }
         #endregion
+
 
     }
 }
