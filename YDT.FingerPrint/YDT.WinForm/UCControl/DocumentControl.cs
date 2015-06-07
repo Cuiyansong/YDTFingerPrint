@@ -158,7 +158,7 @@ namespace YDT.WinForm.UCControl
                     }
                     else
                     {
-                        this.Txb_Addr.Text = idCardWrapper.PucCHMsg;
+                        ReadIDCardInfo(idCardWrapper);
                     }
                 }
                 catch (Exception ex)
@@ -166,6 +166,31 @@ namespace YDT.WinForm.UCControl
                     MessageBox.Show("读取身份证信息失败，" + ex.Message);
                 }
             }
+        }
+        /// <summary>
+        /// Reads the identifier card information.
+        /// </summary>
+        /// <param name="wrapper">The wrapper.</param>
+        private void ReadIDCardInfo(SDTTeleComLib.SDTDLLWrapper wrapper)
+        {
+            if (wrapper == null)
+                return;
+
+            //report.GraphicIDGrid.Image = new Bitmap(200, 200);
+            this.Txb_Addr.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Address);
+            // this.Txb_Age.Text 
+
+            this.Txb_Birth.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Birth);
+            this.Txb_IDCard.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.ID);
+            this.Txb_Name.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Name);
+            this.Txb_Country.Text = "中华人民共和国"; // 只有中国公民才有身份证 -。-
+            this.Txb_Sex.Text = SDTTeleComLib.Uitl.ToSex(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Sex));
+            this.Txb_Nation.Text = SDTTeleComLib.Uitl.ToNation(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Nation));
+            this.Txb_Time.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper);
+
+            // No use.
+            var Issue = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Issue); 
+            var Exper2 = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper2);
         }
         #endregion
 

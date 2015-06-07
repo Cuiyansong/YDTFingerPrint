@@ -10,15 +10,32 @@ namespace SDTTeleComLib
         //变量声明
         private byte[] CardPUCIIN = new byte[255];
         private byte[] pucManaMsg = new byte[255];
-        private byte[] pucCHMsg = new byte[255];
-        private byte[] pucPHMsg = new byte[3024];
+        private byte[] pucCHMsg = new byte[255]; // 文字信息
+        private byte[] pucPHMsg = new byte[3024];// 图片信息
         private UInt32 puiCHMsgLen = 0;
         private UInt32 puiPHMsgLen = 0;
         private Int32 isOpen = 0;
         private Int32 usbPortNum;
         private int st = 0;
 
-        public string PucCHMsg { get; private set; }
+        public string PucCHMsg 
+        {
+            get
+            {
+                return System.Text.UTF8Encoding.Unicode.GetString(pucCHMsg);
+            }
+        }
+
+        public IDCard IDCard {
+            get
+            {
+                if (pucCHMsg.Length > 0)
+                {
+                    return (IDCard)SDTWin32API.ByteToStruct(pucCHMsg, typeof(IDCard));
+                }
+                return new IDCard();
+            } 
+        }
 
         public SDTDLLWrapper()
         {
@@ -53,12 +70,10 @@ namespace SDTTeleComLib
                 if (success)
                 {
                     st = SDTWin32API.SDT_ReadBaseMsg(usbPortNum, pucCHMsg, ref puiCHMsgLen, pucPHMsg, ref puiPHMsgLen, isOpen);
+                    var debugTest = System.Text.UTF8Encoding.Unicode.GetString(pucCHMsg); 
                     if (st != 0x90) success = false;
                 }
-
-                // 显示结果
-                PucCHMsg = System.Text.ASCIIEncoding.Unicode.GetString(pucCHMsg);
-
+                 
                 if (success)
                 {
                     st = SDTWin32API.SDT_ClosePort(usbPortNum);

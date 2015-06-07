@@ -56,6 +56,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Tab_IDCard = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.Txb_Nation = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -261,6 +263,8 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 330F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 330F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.Txb_Nation, 1, 8);
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 8);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label3, 0, 2);
@@ -295,6 +299,26 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(997, 198);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // Txb_Nation
+            // 
+            this.Txb_Nation.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Txb_Nation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Txb_Nation.Location = new System.Drawing.Point(153, 163);
+            this.Txb_Nation.Name = "Txb_Nation";
+            this.Txb_Nation.Size = new System.Drawing.Size(324, 21);
+            this.Txb_Nation.TabIndex = 19;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Location = new System.Drawing.Point(3, 160);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(144, 20);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "民族：";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
@@ -461,8 +485,8 @@
             this.Btn_ReadIDCard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Btn_ReadIDCard.Location = new System.Drawing.Point(813, 3);
             this.Btn_ReadIDCard.Name = "Btn_ReadIDCard";
-            this.tableLayoutPanel3.SetRowSpan(this.Btn_ReadIDCard, 8);
-            this.Btn_ReadIDCard.Size = new System.Drawing.Size(181, 154);
+            this.tableLayoutPanel3.SetRowSpan(this.Btn_ReadIDCard, 9);
+            this.Btn_ReadIDCard.Size = new System.Drawing.Size(181, 174);
             this.Btn_ReadIDCard.TabIndex = 16;
             this.Btn_ReadIDCard.Text = "读取身份证信息";
             this.Btn_ReadIDCard.UseVisualStyleBackColor = true;
@@ -473,8 +497,8 @@
             this.Pic_user.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Pic_user.Location = new System.Drawing.Point(483, 3);
             this.Pic_user.Name = "Pic_user";
-            this.tableLayoutPanel3.SetRowSpan(this.Pic_user, 8);
-            this.Pic_user.Size = new System.Drawing.Size(324, 154);
+            this.tableLayoutPanel3.SetRowSpan(this.Pic_user, 9);
+            this.Pic_user.Size = new System.Drawing.Size(324, 174);
             this.Pic_user.TabIndex = 17;
             this.Pic_user.TabStop = false;
             // 
@@ -596,5 +620,7 @@
         private System.Windows.Forms.TextBox Txb_Country;
         private System.Windows.Forms.Button Btn_ReadIDCard;
         private System.Windows.Forms.PictureBox Pic_user;
+        private System.Windows.Forms.TextBox Txb_Nation;
+        private System.Windows.Forms.Label label9;
     }
 }
