@@ -18,7 +18,7 @@ namespace SDTTeleComLib
         private Int32 usbPortNum;
         private int st = 0;
 
-        public string PucCHMsg 
+        public string PucCHMsg
         {
             get
             {
@@ -26,7 +26,8 @@ namespace SDTTeleComLib
             }
         }
 
-        public IDCard IDCard {
+        public IDCard IDCard
+        {
             get
             {
                 if (pucCHMsg.Length > 0)
@@ -34,7 +35,15 @@ namespace SDTTeleComLib
                     return (IDCard)SDTWin32API.ByteToStruct(pucCHMsg, typeof(IDCard));
                 }
                 return new IDCard();
-            } 
+            }
+        }
+
+        public byte[] ImageBytes
+        {
+            get
+            {
+                return pucPHMsg;
+            }
         }
 
         public SDTDLLWrapper()
@@ -70,10 +79,10 @@ namespace SDTTeleComLib
                 if (success)
                 {
                     st = SDTWin32API.SDT_ReadBaseMsg(usbPortNum, pucCHMsg, ref puiCHMsgLen, pucPHMsg, ref puiPHMsgLen, isOpen);
-                    var debugTest = System.Text.UTF8Encoding.Unicode.GetString(pucCHMsg); 
+                    var debugTest = System.Text.UTF8Encoding.Unicode.GetString(pucCHMsg);
                     if (st != 0x90) success = false;
                 }
-                 
+
                 if (success)
                 {
                     st = SDTWin32API.SDT_ClosePort(usbPortNum);
@@ -91,9 +100,13 @@ namespace SDTTeleComLib
             return success;
         }
 
+
+        #region IDisposable
         public void Dispose()
         {
 
         }
+        #endregion
+
     }
 }

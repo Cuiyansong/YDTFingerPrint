@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SDTTeleComLib
 {
-    internal class SDTWin32API
+    public class SDTWin32API
     {
         #region API声明
         [DllImport("sdtapi.dll", CallingConvention = CallingConvention.StdCall)]
@@ -24,9 +24,11 @@ namespace SDTTeleComLib
         [DllImport("sdtapi.dll", CallingConvention = CallingConvention.StdCall)]
         internal static extern int SDT_ReadBaseMsg(int iPort, byte[] pucCHMsg, ref UInt32 puiCHMsgLen, byte[] pucPHMsg, ref UInt32 puiPHMsgLen, int iIfOpen);
 
+        [DllImport("WltRS.dll", CallingConvention = CallingConvention.StdCall)]
+        public static extern int GetBmp(String Wlt_File, int intf);
         #endregion
 
-        #region Struture Helper
+        #region Helper
         /// <summary>
         /// Structures to bytes.
         /// </summary>
@@ -34,7 +36,7 @@ namespace SDTTeleComLib
         /// <param name="size">The size.</param>
         /// <returns></returns>
         public static byte[] StructToBytes(object structObj, int size)
-        { 
+        {
             int num = 2;
             byte[] bytes = new byte[size];
             IntPtr structPtr = Marshal.AllocHGlobal(size);

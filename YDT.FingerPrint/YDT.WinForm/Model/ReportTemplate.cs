@@ -175,6 +175,25 @@ namespace YDT.WinForm.Model
             g.FillRectangle(new SolidBrush(Color.White), PrintHelper.MillimetreToPixel(new RectangleF(0, 0, paperWidth, paperHeight)));
         }
         /// <summary>
+        /// DrawPageHeader
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="doc"></param>
+        private void DrawPageHeader(Graphics g)
+        {
+            var drawRect = headerRect;
+
+            //g.DrawLine(LinePen, PrintHelper.MillimetreToPixel(new Point(10, (int)drawRect.Top)), PrintHelper.MillimetreToPixel(new Point((int)drawRect.Width - 10, (int)drawRect.Top)));
+
+            StringFormat strFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Near,
+                LineAlignment = StringAlignment.Center,
+            };
+            GenerateRectangleString(g, DocSetting.Instance.ReportHeader, normalFont, normalBrush, strFormat, drawRect, false);
+
+        }
+        /// <summary>
         /// DrawTitle
         /// </summary>
         /// <param name="g"></param>
@@ -273,25 +292,6 @@ namespace YDT.WinForm.Model
                 LineAlignment = StringAlignment.Center,
             };
             GenerateRectangleString(g, DocSetting.Instance.ReportFooter, normalFont, normalBrush, strFormat, drawRect, false);
-        }
-        /// <summary>
-        /// DrawPageHeader
-        /// </summary>
-        /// <param name="g"></param>
-        /// <param name="doc"></param>
-        private void DrawPageHeader(Graphics g)
-        {
-            var drawRect = headerRect;
-
-            //g.DrawLine(LinePen, PrintHelper.MillimetreToPixel(new Point(10, (int)drawRect.Top)), PrintHelper.MillimetreToPixel(new Point((int)drawRect.Width - 10, (int)drawRect.Top)));
-
-            StringFormat strFormat = new StringFormat()
-            {
-                Alignment = StringAlignment.Near,
-                LineAlignment = StringAlignment.Center,
-            };
-            GenerateRectangleString(g, DocSetting.Instance.ReportHeader, normalFont, normalBrush, strFormat, drawRect, false);
-
         }
         /// <summary>
         /// GenerateRectangleString

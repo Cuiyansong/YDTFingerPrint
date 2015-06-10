@@ -116,12 +116,21 @@ namespace SDTTeleComLib
         /// </summary>
         /// <param name="age">The age.</param>
         /// <returns></returns>
-        public static string ToAge(string age) 
+        public static string ToAge(string age)
         {
-            DateTime birth = new DateTime();
+            if (age.Length != 8)
+            {
+                return "0";
+            }
 
-            // DateTime.Now
-            return "";
+            int year = int.Parse(age.Substring(0, 4));
+            int month = int.Parse(age.Substring(4, 2));
+            int day = int.Parse(age.Substring(6, 2));
+            DateTime birth = new DateTime(year, month, day);
+
+            int birthage = DateTime.Now.Year - birth.Year;
+            int adjustage = (birth.Month * 100 + birth.Day) - (DateTime.Now.Month * 100 + DateTime.Now.Day) >= 0 ? 0 : -1;
+            return (birthage + adjustage).ToString();
         }
     }
 }

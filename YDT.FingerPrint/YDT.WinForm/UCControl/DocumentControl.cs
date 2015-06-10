@@ -10,12 +10,15 @@ using YDT.WinForm.UCBase;
 using YDT.WinForm.Common;
 using YDT.WinForm.Utlity;
 using YDT.WinForm.Model;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace YDT.WinForm.UCControl
 {
     public partial class DocumentControl : DockChildEx
     {
         #region Private Property
+        private string iDCardFolder = Application.StartupPath + "\\Temp\\";
         private ReportTemplate report = new ReportTemplate();
         #endregion
 
@@ -56,7 +59,7 @@ namespace YDT.WinForm.UCControl
         /// <param name="g"></param>
         public void DrawReportImage(Graphics g)
         {
-            //report.GraphicIDGrid.Image = new Bitmap(200, 200);
+            report.GraphicIDGrid.Image = new Bitmap(this.Pic_user.Image);
             report.GraphicIDGrid.ApplicantAddr = this.Txb_Addr.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantAge = this.Txb_Age.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantBirth = this.Txb_Birth.Text.TrimEnd();
@@ -159,6 +162,7 @@ namespace YDT.WinForm.UCControl
                     else
                     {
                         ReadIDCardInfo(idCardWrapper);
+                        ReadIDCardImage(idCardWrapper);
                     }
                 }
                 catch (Exception ex)
@@ -166,6 +170,33 @@ namespace YDT.WinForm.UCControl
                     MessageBox.Show("读取身份证信息失败，" + ex.Message);
                 }
             }
+        }
+        /// <summary>
+        /// Reads the identifier card image.
+        /// </summary>
+        /// <exception cref="System.NotImplementedException"></exception>
+        private void ReadIDCardImage(SDTTeleComLib.SDTDLLWrapper wrapper)
+        {
+            string wltfile = iDCardFolder + "idCard.wlt";
+            string bmpfile = iDCardFolder + "idCard.bmp";
+            int usbPort = 2;
+
+            using (FileStream fs = new FileStream(wltfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+                fs.Write(wrapper.ImageBytes, 0, wrapper.ImageBytes.Length);
+                fs.Flush();
+            }
+
+            SDTTeleComLib.SDTWin32API.GetBmp(wltfile, usbPort);
+
+            using (FileStream fs = new FileStream(bmpfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+                this.Pic_user.SizeMode = PictureBoxSizeMode.CenterImage;
+                fs.Seek(0, SeekOrigin.Begin);
+                this.Pic_user.Image = Image.FromStream(fs);
+            }
+
+            File.Delete(bmpfile);
         }
         /// <summary>
         /// Reads the identifier card information.
@@ -177,20 +208,20 @@ namespace YDT.WinForm.UCControl
                 return;
 
             //report.GraphicIDGrid.Image = new Bitmap(200, 200);
-            this.Txb_Addr.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Address);
-            // this.Txb_Age.Text 
+            this.Txb_Addr.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Address).Trim();
+            this.Txb_Age.Text = SDTTeleComLib.Uitl.ToAge(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Birth)).Trim();
 
-            this.Txb_Birth.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Birth);
-            this.Txb_IDCard.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.ID);
-            this.Txb_Name.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Name);
+            this.Txb_Birth.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Birth).Trim();
+            this.Txb_IDCard.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.ID).Trim();
+            this.Txb_Name.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Name).Trim();
             this.Txb_Country.Text = "中华人民共和国"; // 只有中国公民才有身份证 -。-
-            this.Txb_Sex.Text = SDTTeleComLib.Uitl.ToSex(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Sex));
-            this.Txb_Nation.Text = SDTTeleComLib.Uitl.ToNation(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Nation));
-            this.Txb_Time.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper);
+            this.Txb_Sex.Text = SDTTeleComLib.Uitl.ToSex(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Sex)).Trim();
+            this.Txb_Nation.Text = SDTTeleComLib.Uitl.ToNation(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Nation)).Trim();
+            this.Txb_Time.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper).Trim();
 
             // No use.
-            var Issue = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Issue); 
-            var Exper2 = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper2);
+            var Issue = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Issue).Trim();
+            var Exper2 = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper2).Trim();
         }
         #endregion
 
