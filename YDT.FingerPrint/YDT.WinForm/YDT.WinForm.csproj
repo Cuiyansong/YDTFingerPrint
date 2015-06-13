@@ -129,6 +129,12 @@
     <Compile Include="UCWindow\FrmNewTemplate.Designer.cs">
       <DependentUpon>FrmNewTemplate.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCWindow\FrmNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UCWindow\FrmNote.Designer.cs">
+      <DependentUpon>FrmNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utlity\PrintHelper.cs" />
     <Compile Include="Utlity\TesoWin32Helper.cs" />
     <Compile Include="Utlity\XMLHelper.cs" />
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCWindow\FrmNewTemplate.resx">
       <DependentUpon>FrmNewTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCWindow\FrmNote.resx">
+      <DependentUpon>FrmNote.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

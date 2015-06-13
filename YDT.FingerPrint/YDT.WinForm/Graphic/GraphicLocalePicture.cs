@@ -13,7 +13,7 @@ namespace YDT.WinForm.Graphic
     public class GraphicLocalePicture : GraphicBase, IDisposable
     {
         #region Private Property
-        private Bitmap image; 
+        private Bitmap image;
         #endregion
 
         #region Public Property
@@ -37,10 +37,9 @@ namespace YDT.WinForm.Graphic
         #region Public Method
         public override void Draw(System.Drawing.Graphics g, System.Drawing.RectangleF rectF)
         {
-            if (Image != null) 
+            if (Image != null)
             {
-                g.DrawImage(this.Image, rectF);
-                g.DrawRectangle(new Pen(new SolidBrush(Color.Black)), rectF.X,rectF.Y,rectF.Width,rectF.Height);
+                base.GenerateRectangleImage(g, new Pen(new SolidBrush(Color.Black)), this.Image, rectF, true);
             }
         }
         #endregion
@@ -96,7 +95,7 @@ namespace YDT.WinForm.Graphic
                 {
                     Image.Dispose();
                     Image = null;
-                } 
+                }
             }
             // 清理非托管资源
             //if (nativeResource != IntPtr.Zero)
@@ -106,8 +105,7 @@ namespace YDT.WinForm.Graphic
             //} 
             disposed = true;
         }
-        #endregion
-
+        #endregion 
 
     }
 }

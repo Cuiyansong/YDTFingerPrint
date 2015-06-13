@@ -82,7 +82,7 @@ namespace YDT.WinForm.Model
                 {
                     if (item.Value != null)
                     { 
-                        item.Value.Draw(g, new RectangleF(rectF.X + (int)(index % 5 * cellWidth), (int)(rectF.Y + index / 5 * cellHeight), cellWidth, cellHeight));
+                        item.Value.Draw(g, new RectangleF(rectF.X + (index % 5 * cellWidth), (rectF.Y + index / 5 * cellHeight), cellWidth, cellHeight));
                         index++;
                     }
                 }

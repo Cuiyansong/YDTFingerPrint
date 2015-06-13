@@ -59,17 +59,20 @@ namespace YDT.WinForm.UCControl
         /// <param name="g"></param>
         public void DrawReportImage(Graphics g)
         {
-            report.GraphicIDGrid.Image = new Bitmap(this.Pic_user.Image);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+
+            report.GraphicIDGrid.ApplicantPic = this.Pic_user.Image == null ? null : new Bitmap(this.Pic_user.Image);
             report.GraphicIDGrid.ApplicantAddr = this.Txb_Addr.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantAge = this.Txb_Age.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantBirth = this.Txb_Birth.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantID = this.Txb_IDCard.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantName = this.Txb_Name.Text.TrimEnd();
-            report.GraphicIDGrid.ApplicantNationality = this.Txb_Country.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantCountry = this.Txb_Country.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantSex = this.Txb_Sex.Text.TrimEnd();
             report.GraphicIDGrid.ApplicantTime = this.Txb_Time.Text.TrimEnd();
+            report.GraphicIDGrid.ApplicantNation = this.Txb_Nation.Text.TrimEnd();
 
-            //report.GraphicLocPic.Image = new Bitmap(200, 200);
+            report.GraphicLocPic.Image = this.Pic_LocBmp.Image == null? null : new Bitmap(this.Pic_LocBmp.Image);
 
             report.Hands.AddFinger((this.Tlt_LeftHand.Controls[0] as FingerControl).Fprint);
             report.Hands.AddFinger((this.Tlt_LeftHand.Controls[1] as FingerControl).Fprint);
@@ -172,6 +175,28 @@ namespace YDT.WinForm.UCControl
             }
         }
         /// <summary>
+        /// Handles the Click event of the Btn_LocBmp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void Btn_LocBmp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //this.openFileDialog1.Filter = "";
+                var dialog = this.openFileDialog1.ShowDialog();
+                if (dialog.Equals(DialogResult.OK))
+                {
+                    if (!openFileDialog1.FileName.Equals(string.Empty))
+                        this.Pic_LocBmp.Image = Image.FromFile(openFileDialog1.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取身份证信息失败，" + ex.Message);
+            }
+        }
+        /// <summary>
         /// Reads the identifier card image.
         /// </summary>
         /// <exception cref="System.NotImplementedException"></exception>
@@ -193,7 +218,7 @@ namespace YDT.WinForm.UCControl
             {
                 this.Pic_user.SizeMode = PictureBoxSizeMode.CenterImage;
                 fs.Seek(0, SeekOrigin.Begin);
-                this.Pic_user.Image = Image.FromStream(fs);
+                this.Pic_user.Image = Image.FromStream(fs).Clone() as Image;
             }
 
             File.Delete(bmpfile);
@@ -217,7 +242,7 @@ namespace YDT.WinForm.UCControl
             this.Txb_Country.Text = "中华人民共和国"; // 只有中国公民才有身份证 -。-
             this.Txb_Sex.Text = SDTTeleComLib.Uitl.ToSex(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Sex)).Trim();
             this.Txb_Nation.Text = SDTTeleComLib.Uitl.ToNation(System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Nation)).Trim();
-            this.Txb_Time.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper).Trim();
+            // this.Txb_Time.Text = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Exper).Trim();
 
             // No use.
             var Issue = System.Text.UTF8Encoding.Unicode.GetString(wrapper.IDCard.Issue).Trim();

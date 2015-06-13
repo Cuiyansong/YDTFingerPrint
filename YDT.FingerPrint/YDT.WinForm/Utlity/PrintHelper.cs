@@ -54,15 +54,15 @@ namespace YDT.WinForm.Utlity
             };
         }
 
-        public static Rectangle MillimetreToPixel(RectangleF rectF)
+        public static RectangleF MillimetreToPixel(RectangleF rectF)
         {
-            return new Rectangle()
+            return  new RectangleF()
             {
-                X = (int)MillimetreToPixel(rectF.X),
-                Y = (int)MillimetreToPixel(rectF.Y),
-                Width = (int)MillimetreToPixel(rectF.Width),
-                Height = (int)MillimetreToPixel(rectF.Height),
-            };
+                X = MillimetreToPixel(rectF.X),
+                Y = MillimetreToPixel(rectF.Y),
+                Width = MillimetreToPixel(rectF.Width),
+                Height = MillimetreToPixel(rectF.Height),
+            }; 
         }
 
         public static SizeF MillimetreToPixel(SizeF sizeF)
@@ -83,14 +83,14 @@ namespace YDT.WinForm.Utlity
             return (int)Math.Round((1 / DpiX) * div * pixel, 0);
         }
 
-        public static Rectangle PixelToMillimetre(RectangleF rectF)
+        public static RectangleF PixelToMillimetre(RectangleF rectF)
         {
-            return new Rectangle()
+            return new RectangleF()
             {
-                X = (int)PixelToMillimetre(rectF.X),
-                Y = (int)PixelToMillimetre(rectF.Y),
-                Width = (int)PixelToMillimetre(rectF.Width),
-                Height = (int)PixelToMillimetre(rectF.Height),
+                X = PixelToMillimetre(rectF.X),
+                Y = PixelToMillimetre(rectF.Y),
+                Width = PixelToMillimetre(rectF.Width),
+                Height = PixelToMillimetre(rectF.Height),
             };
         }
 
@@ -117,5 +117,15 @@ namespace YDT.WinForm.Utlity
 
 
 
+    }
+
+    public static class RectangleExtension
+    {
+        public static RectangleF[] ToArray(this RectangleF rect)
+        {
+            var array = new RectangleF[1];
+            array[0] = rect;
+            return array;
+        }
     }
 }

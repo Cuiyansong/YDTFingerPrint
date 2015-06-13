@@ -61,9 +61,7 @@ namespace YDT.WinForm.Graphic
         /// </summary>
         public GraphicFinger()
         {
-#if DEBUG
-            Remark = "Debug Mode: 无指纹图片";
-#endif
+           
         }
         #endregion
 
@@ -161,16 +159,16 @@ namespace YDT.WinForm.Graphic
         public override void Draw(Graphics g, RectangleF rectF)
         {
             // Draw border
-            g.DrawRectangle(borderPen, PrintHelper.MillimetreToPixel(new Rectangle((int)rectF.X, (int)rectF.Y, (int)rectF.Width, (int)rectF.Height)));
+            g.DrawRectangles(borderPen, PrintHelper.MillimetreToPixel(new RectangleF(rectF.X, rectF.Y, rectF.Width, rectF.Height)).ToArray());
 
             // Draw image
             if (this.Image != null)
             {
-                Rectangle imageRect = new Rectangle((int)rectF.X, (int)rectF.Y, (int)rectF.Width, (int)(rectF.Height - fMsgHeight));
+                RectangleF imageRect = new RectangleF(rectF.X, rectF.Y, rectF.Width, (rectF.Height - fMsgHeight));
                 var width = imageRect.Width > fSize.Width ? fSize.Width : imageRect.Width;
                 var height = imageRect.Height > fSize.Height ? fSize.Height : imageRect.Height;
 
-                g.DrawImage(this.Image, PrintHelper.MillimetreToPixel(new Rectangle(imageRect.X + (imageRect.Width - width) / 2, imageRect.Y + (imageRect.Height - height) / 2, width, height)));
+                g.DrawImage(this.Image, PrintHelper.MillimetreToPixel(new RectangleF(imageRect.X + (imageRect.Width - width) / 2, imageRect.Y + (imageRect.Height - height) / 2, width, height)));
             }
             else // Draw Remark
             {

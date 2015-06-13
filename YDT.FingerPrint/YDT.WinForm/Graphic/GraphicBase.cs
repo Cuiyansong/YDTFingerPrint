@@ -40,9 +40,26 @@ namespace YDT.WinForm.Graphic
         protected void GenerateRectangleString(Graphics g, Pen pen, string content, Font font, Brush brush, StringFormat format, RectangleF rectF, bool isShowRect)
         {
             // SizeF contentSize = PrintHelper.PixelToMillimetre(g.MeasureString(content, font));
-            if (isShowRect)
-                g.DrawRectangle(pen, PrintHelper.MillimetreToPixel(rectF));
             g.DrawString(content, font, brush, PrintHelper.MillimetreToPixel(rectF), format);
+            if (isShowRect)
+                g.DrawRectangles(pen, PrintHelper.MillimetreToPixel(rectF).ToArray());
+        }
+
+        protected void GenerateRectangleImage(Graphics g, Pen pen, Bitmap image, RectangleF rectF, bool isShowRect)
+        {  
+            if (image != null)
+                g.DrawImage(image, PrintHelper.MillimetreToPixel(rectF));
+            
+            if (isShowRect)
+                g.DrawRectangles(pen, PrintHelper.MillimetreToPixel(rectF).ToArray());
+
+            // Water mark
+            //g.DrawString("水印", new Font("宋体", 10, FontStyle.Regular), new SolidBrush(Color.Black), PrintHelper.MillimetreToPixel(rectF));
+        }
+
+        protected void GenerateGridLine(Graphics g,Pen pen,PointF startPoint, PointF endPoint)
+        {
+            g.DrawLine(pen, PrintHelper.MillimetreToPixel(startPoint), PrintHelper.MillimetreToPixel(endPoint));
         }
     }
 }

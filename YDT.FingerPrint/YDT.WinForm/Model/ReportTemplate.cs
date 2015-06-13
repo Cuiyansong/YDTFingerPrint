@@ -15,7 +15,7 @@ namespace YDT.WinForm.Model
     /// </summary>
     [XmlRootAttribute("ReportTemplate", Namespace = "YDT.ReportTemplate", IsNullable = false)]
     [ReportDescription(RangeAttachData.Text, "通用报告模板1")]
-    public class ReportTemplate : IReportTemplate, IDisposable
+    public class ReportTemplate : GraphicBase, IReportTemplate, IDisposable
     {
         #region Graphic Resource
         private Pen LinePen = new Pen(Color.Gray, 2);
@@ -161,7 +161,7 @@ namespace YDT.WinForm.Model
                 LineAlignment = StringAlignment.Center,
                 FormatFlags = StringFormatFlags.DirectionVertical,
             };
-            GenerateRectangleString(g, "···········装···········订···········线···········", gutterFont, gutterBrush, strFormat, gutterRect, false);
+            base.GenerateRectangleString(g, LinePen, "···········装···········订···········线···········", gutterFont, gutterBrush, strFormat, gutterRect, false);
         }
         /// <summary>
         /// DrawReportBorder
@@ -170,7 +170,7 @@ namespace YDT.WinForm.Model
         /// <param name="doc"></param>
         private void DrawReportBorder(Graphics g)
         {
-            g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(new RectangleF(0, 0, paperWidth, paperHeight)));
+            g.DrawRectangles(LinePen, PrintHelper.MillimetreToPixel(new RectangleF(0, 0, paperWidth, paperHeight)).ToArray());
             // Draw background
             g.FillRectangle(new SolidBrush(Color.White), PrintHelper.MillimetreToPixel(new RectangleF(0, 0, paperWidth, paperHeight)));
         }
@@ -190,7 +190,7 @@ namespace YDT.WinForm.Model
                 Alignment = StringAlignment.Near,
                 LineAlignment = StringAlignment.Center,
             };
-            GenerateRectangleString(g, DocSetting.Instance.ReportHeader, normalFont, normalBrush, strFormat, drawRect, false);
+            base.GenerateRectangleString(g, LinePen, DocSetting.Instance.ReportHeader, normalFont, normalBrush, strFormat, drawRect, false);
 
         }
         /// <summary>
@@ -206,9 +206,7 @@ namespace YDT.WinForm.Model
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center,
             };
-            GenerateRectangleString(g, DocSetting.Instance.ReportTitle, titleFont, normalBrush, strFormat, drawRect, false);
-
-            // g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(drawRect));
+            base.GenerateRectangleString(g, LinePen, DocSetting.Instance.ReportTitle, titleFont, normalBrush, strFormat, drawRect, false);
         }
         /// <summary>
         /// DrawHandImages
@@ -243,37 +241,7 @@ namespace YDT.WinForm.Model
             if (this.graphicIDGrid != null)
             {
                 this.graphicIDGrid.Draw(g, gridRect);
-            }
-
-            //var gridMarginX = 0;
-            //var gridMarginY = 0;
-            //var gridRaws = 3;
-            //var gridColums = 3;
-            //RectangleF[,] gridRects = new RectangleF[gridRaws, gridColums];
-            //var gridCellWidth = (int)((drawRect.Width - gridMarginX * 2) / (float)gridRaws);
-            //var gridCellHeight = (int)((drawRect.Height - gridMarginY * 2) / (float)gridColums);
-
-            //// create grid cells
-            //for (int i = 0; i < gridRaws; i++)
-            //{
-            //    for (int j = 0; j < gridColums; j++)
-            //    {
-            //        gridRects[i, j] = new RectangleF(gridMarginX + drawRect.X + j % gridColums * gridCellWidth, gridMarginY + drawRect.Y + i % gridRaws * gridCellHeight, gridCellWidth, gridCellHeight);
-            //    }
-            //}
-
-            //// draw grid infomation
-            //if (doc != null && doc.Setting != null)
-            //{
-            //    StringFormat strFormat = new StringFormat() { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center, };
-            //    GenerateRectangleString(g, string.Format("申请人: {0}", doc.Setting.CurCustomer.Name), gridFont, normalBrush, strFormat, gridRects[0, 0], true);
-            //    GenerateRectangleString(g, string.Format("性别: {0}", doc.Setting.CurCustomer.Sex), gridFont, normalBrush, strFormat, gridRects[0, 1], true);
-            //    GenerateRectangleString(g, string.Format("出生日期: {0}", doc.Setting.CurCustomer.Birthday), gridFont, normalBrush, strFormat, gridRects[0, 2], true);
-            //    GenerateRectangleString(g, string.Format("国籍: {0}", doc.Setting.CurCustomer.Nationality), gridFont, normalBrush, strFormat, gridRects[1, 0], true);
-            //    GenerateRectangleString(g, string.Format("身份证(护照)号码: {0}", doc.Setting.CurCustomer.IDCard), gridFont, normalBrush, strFormat, RectangleF.Union(gridRects[1, 1], gridRects[1, 2]), true);
-            //    GenerateRectangleString(g, string.Format("时间: {0}", doc.Setting.CurCustomer.Time), gridFont, normalBrush, strFormat, gridRects[2, 0], true);
-            //    GenerateRectangleString(g, string.Format("地点: {0}", doc.Setting.CurCustomer.Address), gridFont, normalBrush, strFormat, RectangleF.Union(gridRects[2, 1], gridRects[2, 2]), true);
-            //}
+            } 
         }
         /// <summary>
         /// DrawPageFooter
@@ -284,30 +252,14 @@ namespace YDT.WinForm.Model
         {
             var drawRect = footerRect;
 
-            g.DrawLine(LinePen, PrintHelper.MillimetreToPixel(new Point(10, (int)drawRect.Top)), PrintHelper.MillimetreToPixel(new Point((int)drawRect.Width - 10, (int)drawRect.Top)));
+            g.DrawLine(LinePen, PrintHelper.MillimetreToPixel(new PointF(footerRect.Left, footerRect.Top)), PrintHelper.MillimetreToPixel(new PointF(footerRect.Right, footerRect.Top)));
 
             StringFormat strFormat = new StringFormat()
             {
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center,
             };
-            GenerateRectangleString(g, DocSetting.Instance.ReportFooter, normalFont, normalBrush, strFormat, drawRect, false);
-        }
-        /// <summary>
-        /// GenerateRectangleString
-        /// </summary>
-        /// <param name="g"></param>
-        /// <param name="content"></param>
-        /// <param name="font"></param>
-        /// <param name="brush"></param>
-        /// <param name="format"></param>
-        /// <param name="rectF"></param>
-        private void GenerateRectangleString(Graphics g, string content, Font font, Brush brush, StringFormat format, RectangleF rectF, bool isShowRect)
-        {
-            // SizeF contentSize = PrintHelper.PixelToMillimetre(g.MeasureString(content, font));
-            if (isShowRect)
-                g.DrawRectangle(LinePen, PrintHelper.MillimetreToPixel(rectF));
-            g.DrawString(content, font, brush, PrintHelper.MillimetreToPixel(rectF), format);
+            base.GenerateRectangleString(g, LinePen, DocSetting.Instance.ReportFooter, normalFont, normalBrush, strFormat, drawRect, false);
         }
 
         #endregion
@@ -391,5 +343,10 @@ namespace YDT.WinForm.Model
             disposed = true;
         }
         #endregion
+
+        public override void Draw(Graphics g, RectangleF rectF)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
