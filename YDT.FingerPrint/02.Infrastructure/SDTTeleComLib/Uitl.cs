@@ -129,7 +129,7 @@ namespace SDTTeleComLib
             DateTime birth = new DateTime(year, month, day);
 
             int birthage = DateTime.Now.Year - birth.Year;
-            int adjustage = (birth.Month * 100 + birth.Day) - (DateTime.Now.Month * 100 + DateTime.Now.Day) >= 0 ? 0 : -1;
+            int adjustage = (birth.Month * 100 + birth.Day) - (DateTime.Now.Month * 100 + DateTime.Now.Day) < 0 ? 0 : -1;
             return (birthage + adjustage).ToString();
         }
     }
