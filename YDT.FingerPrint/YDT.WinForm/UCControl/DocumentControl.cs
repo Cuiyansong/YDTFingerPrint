@@ -59,7 +59,7 @@ namespace YDT.WinForm.UCControl
         /// <param name="g"></param>
         public void DrawReportImage(Graphics g)
         {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            // g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
             report.GraphicIDGrid.ApplicantPic = this.Pic_user.Image == null ? null : new Bitmap(this.Pic_user.Image);
             report.GraphicIDGrid.ApplicantAddr = this.Txb_Addr.Text.TrimEnd();

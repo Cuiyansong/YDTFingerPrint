@@ -14,7 +14,7 @@ namespace YDT.WinForm.Graphic
     public class GraphicIDGrid : GraphicBase, IDisposable
     {
         #region Private Property
-        private Pen gridPen = new Pen(Color.Gray, 2);
+        private Pen gridPen = new Pen(Color.Black, 2);
         private Font gridFont = new Font("宋体", 10, FontStyle.Regular);
         private Brush normalBrush = new SolidBrush(Color.Black);
         private Bitmap image;

@@ -18,7 +18,7 @@ namespace YDT.WinForm.Model
     public class ReportTemplate : GraphicBase, IReportTemplate, IDisposable
     {
         #region Graphic Resource
-        private Pen LinePen = new Pen(Color.Gray, 2);
+        private Pen LinePen = new Pen(Color.Black, 2);
         private Font normalFont = new Font("宋体", 12, FontStyle.Regular);
         private Font gutterFont = new Font("黑体", 8, FontStyle.Regular);
         private Font titleFont = new Font("黑体", 25, FontStyle.Bold);

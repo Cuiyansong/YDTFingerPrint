@@ -17,7 +17,7 @@ namespace YDT.WinForm.Graphic
         #region Private Property
         private Size fSize = new Size(15, 20);
         private int fMsgHeight = 10;
-        private Pen borderPen = new Pen(Color.Gray, 2);
+        private Pen borderPen = new Pen(Color.Black, 2);
         private Pen normalPen = new Pen(Color.Black, 1);
         private Font normalFont = new Font("宋体", 12, FontStyle.Regular);
         private Font remarkFont = new Font("宋体", 8, FontStyle.Regular);
@@ -61,7 +61,7 @@ namespace YDT.WinForm.Graphic
         /// </summary>
         public GraphicFinger()
         {
-           
+
         }
         #endregion
 
@@ -168,7 +168,7 @@ namespace YDT.WinForm.Graphic
                 var width = imageRect.Width > fSize.Width ? fSize.Width : imageRect.Width;
                 var height = imageRect.Height > fSize.Height ? fSize.Height : imageRect.Height;
 
-                g.DrawImage(this.Image, PrintHelper.MillimetreToPixel(new RectangleF(imageRect.X + (imageRect.Width - width) / 2, imageRect.Y + (imageRect.Height - height) / 2, width, height)));
+                base.GenerateRectangleImage(g, normalPen, this.Image, new RectangleF(imageRect.X + (imageRect.Width - width) / 2, imageRect.Y + (imageRect.Height - height) / 2, width, height), false);
             }
             else // Draw Remark
             {
